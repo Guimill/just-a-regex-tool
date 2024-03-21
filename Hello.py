@@ -14,38 +14,31 @@
 
 import streamlit as st
 from streamlit.logger import get_logger
+import re
 
 LOGGER = get_logger(__name__)
 
 
-def run():
-    st.set_page_config(
-        page_title="Hello",
-        page_icon="👋",
-    )
+def transform_list(input_text):
+    # Split the input text by '\n' and remove empty lines
+    input_list = filter(None, input_text.split('\n'))
 
-    st.write("# Welcome to Streamlit! 👋")
+    # Enclose each item in single quotes and join them with commas
+    transformed_text = ','.join([f"'{item}'" for item in input_list])
 
-    st.sidebar.success("Select a demo above.")
+    return f"({transformed_text})"
 
-    st.markdown(
-        """
-        Streamlit is an open-source app framework built specifically for
-        Machine Learning and Data Science projects.
-        **👈 Select a demo from the sidebar** to see some examples
-        of what Streamlit can do!
-        ### Want to learn more?
-        - Check out [streamlit.io](https://streamlit.io)
-        - Jump into our [documentation](https://docs.streamlit.io)
-        - Ask a question in our [community
-          forums](https://discuss.streamlit.io)
-        ### See more complex demos
-        - Use a neural net to [analyze the Udacity Self-driving Car Image
-          Dataset](https://github.com/streamlit/demo-self-driving)
-        - Explore a [New York City rideshare dataset](https://github.com/streamlit/demo-uber-nyc-pickups)
-    """
-    )
+def main():
+    st.title("List Transformer")
 
+    st.write("Paste your list below (separated by \\n):")
+
+    input_text = st.text_area("Input List", height=100)
+
+    if st.button("Transform"):
+        transformed_text = transform_list(input_text)
+        st.write("Transformed List:")
+        st.code(transformed_text)
 
 if __name__ == "__main__":
-    run()
+    main()

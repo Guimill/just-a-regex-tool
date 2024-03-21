@@ -1,7 +1,3 @@
-# Welcome to streamlit
+# Welcome to JUST A REGEX TOOL
 
-This is the app you get when you run `streamlit hello`, extracted as its own app.
-
-Edit [Hello.py](./Hello.py) to customize this app to your heart's desire. ❤️
-
-Check it out on [Streamlit Community Cloud](https://st-hello-app.streamlit.app/)
+I developped this interface to help me automatize some shitty regex that I had to do in a job of mine.
