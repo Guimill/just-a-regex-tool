@@ -11,11 +11,16 @@ def transform_list(input_text):
 
     for line in lines:
         if line.strip():  # Check if line is not empty
-            # Extract necessary information using regular expressions
-            match = re.match(r'^(\S+)\s+\S+=\[(.*?)\];\s+nom batiment \(REFSITES\)=\[(.*?)\]$', line.strip())
-            if match:
-                # Append matched groups in desired CSV format
-                transformed_lines.append(','.join(match.groups()))
+            # Apply regex replacements
+            line = re.sub(r'^IMB.*$', '', line)
+            line = re.sub(r'^\s ', '', line)
+            line = re.sub(r"^L'Objet \(", '', line)
+            line = re.sub(r'ad_nombat=', '', line)
+            line = re.sub(r'[;]+', ',', line)
+            line = re.sub(r'[.]+', ',', line)
+            line = re.sub(r'nom\ batiment\ \(REFSITES\)=', '', line)
+            line = re.sub(r'\[Vide\]', 'no name', line)
+            transformed_lines.append(line.strip())
 
     return '\n'.join(transformed_lines)
 
