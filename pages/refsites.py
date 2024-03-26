@@ -28,6 +28,8 @@ def transform_list(input_text):
             line = re.sub(r',,,',',,',line)
             line = re.sub(r'\,$','',line)
             line = re.sub(r',,N',',N',line)
+            line = re.sub(r',,',',"",', line)
+            line = re.sub(r',$',',""', line)
 
 
             final_transform.append(line)
