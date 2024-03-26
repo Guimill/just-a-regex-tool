@@ -25,9 +25,9 @@ def transform_list(input_text):
             line = re.sub(r'no','',line)
             line = re.sub(r'batimen','',line)
             line = re.sub(r'REFSITES=','',line)
-            line = re.sub(r',,',',',line)
+            line = re.sub(r',,,',',,',line)
             line = re.sub(r'\,$','',line)
-
+            line = re.sub(r',,N',',N',line)
 
 
             final_transform.append(line)
