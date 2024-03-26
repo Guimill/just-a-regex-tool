@@ -6,23 +6,33 @@ LOGGER = get_logger(__name__)
 
 
 def transform_list(input_text):
-    lines = input_text.split('\n')
-    transformed_lines = []
 
-    for line in lines:
+    lines = input_text.split('\n')
+    transformed_lines = [line.strip() for line in lines if ')' in line]
+
+    final_transform = []
+
+    for line in transformed_lines:
         if line.strip():  # Check if line is not empty
             # Apply regex replacements
-            line = re.sub(r'^IMB.*$', '', line)
-            line = re.sub(r'^\s ', '', line)
-            line = re.sub(r"^L'Objet \(", '', line)
             line = re.sub(r'ad_nombat=', '', line)
-            line = re.sub(r'[;]+', ',', line)
-            line = re.sub(r'[.]+', ',', line)
-            line = re.sub(r'nom\ batiment\ \(REFSITES\)=', '', line)
-            line = re.sub(r'\[Vide\]', 'no name', line)
-            transformed_lines.append(line.strip())
+            line = re.sub(r'Vide', '', line)
+            line = re.sub(r'\)', '', line)
+            line = re.sub(r'\(', '', line)
+            line = re.sub(r'no name', '', line)
+            line = re.sub(r'.\s',',',line)
+            line = re.sub(r'\[\]','',line)
+            line = re.sub(r'no','',line)
+            line = re.sub(r'batimen','',line)
+            line = re.sub(r'REFSITES=','',line)
+            line = re.sub(r',,',',',line)
+            line = re.sub(r'\,$','',line)
 
-    return '\n'.join(transformed_lines)
+
+
+            final_transform.append(line)
+
+    return '\n'.join(final_transform)
 
 
 def main():
