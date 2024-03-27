@@ -15,21 +15,14 @@ def transform_list(input_text):
     for line in transformed_lines:
         if line.strip():  # Check if line is not empty
             # Apply regex replacements
-            line = re.sub(r'ad_nombat=', '', line)
-            line = re.sub(r'Vide', '', line)
+
+            line = re.sub(r'L\'Objet', '', line)
+            line = re.sub(r'\sad_nombat=\[Vide\]', '""', line)
             line = re.sub(r'\)', '', line)
             line = re.sub(r'\(', '', line)
-            line = re.sub(r'no name', '', line)
-            line = re.sub(r'.\s',',',line)
-            line = re.sub(r'\[\]','',line)
-            line = re.sub(r'no','',line)
-            line = re.sub(r'batimen','',line)
-            line = re.sub(r'REFSITES=','',line)
-            line = re.sub(r',,,',',,',line)
-            line = re.sub(r'\,$','',line)
-            line = re.sub(r',,N',',N',line)
-            line = re.sub(r',,',',"",', line)
-            line = re.sub(r',$',',""', line)
+            line = re.sub(r'nom batiment REFSITES=', '', line)
+            line = re.sub(r'\;', ',', line)
+            line = re.sub(r'\.', ',', line)
 
 
             final_transform.append(line)
