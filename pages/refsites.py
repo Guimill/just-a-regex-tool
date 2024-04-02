@@ -18,6 +18,7 @@ def transform_list(input_text):
 
             line = re.sub(r'L\'Objet', '', line)
             line = re.sub(r'\sad_nombat=\[Vide\]', '""', line)
+            line = re.sub(r'\sad_nombat=', '', line)
             line = re.sub(r'\)', '', line)
             line = re.sub(r'\(', '', line)
             line = re.sub(r'nom batiment REFSITES=', '', line)
