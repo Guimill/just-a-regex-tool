@@ -24,6 +24,7 @@ def transform_list(input_text):
             line = re.sub(r'nom batiment REFSITES=', '', line)
             line = re.sub(r'\;', ',', line)
             line = re.sub(r'\.', ',', line)
+            line = re.sub(r'\s', '', line)
 
 
             final_transform.append(line)
