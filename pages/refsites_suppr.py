@@ -15,8 +15,12 @@ def main():
         
         # Replace double whitespace with commas
         dataframe.replace(to_replace=r'\s\s', value=',', regex=True, inplace=True)
-        # Replace 'NaN' with empty quotes
-        dataframe.replace(to_replace=r'^NaN$', value='""', regex=True, inplace=True)
+        # Replace 'nan' with empty quotes
+        dataframe.fillna("", inplace=True)
+        
+        # Add an empty string between consecutive commas
+        for col in dataframe.columns:
+            dataframe[col] = dataframe[col].apply(lambda x: ','.join(['""' if s == '' else s for s in x.split(',')]))
         
         st.write("Original CSV:")
         # Convert DataFrame to CSV-like format and join all rows into a single string
